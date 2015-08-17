@@ -21,11 +21,14 @@ var rollMany = function(times, pins) {
 };
 
 var assertScoreEquals = function(expected, done) {
-  request(game).get('/score').expect(200, function(err,res) {
-    if (err) return done(err);
-    result = res.body;
-    result.should.have.property('score').eql(expected);
-    done();
+  request(game)
+    .get('/score')
+    .expect(200)
+    .end(function(err,res) {
+      if (err) return done(err);
+      result = res.body;
+      result.should.have.property('score').eql(expected);
+      done();
   });
 };
 
